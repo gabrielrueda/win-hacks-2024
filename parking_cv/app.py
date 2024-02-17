@@ -76,11 +76,11 @@ while i < num_frames:
     car_exit = False
 
     if score[0] == 0: 
-        cv2.polylines(frame,np.int32([box1]), True ,(0,0,255),2  )
+        cv2.polylines(frame,np.int32([box1]), True ,(0,0,255),11  )
         car_exit = False
         i = 0
     else:
-        cv2.polylines(frame,np.int32([box1]),True,(0,255,0), 2)
+        cv2.polylines(frame,np.int32([box1]),True,(0,255,0), 11)
 
         if car_exit == False:
             cv2.putText(frame, timestamp.strftime(" car_exit as: %d %m %Y %I:%M:%S"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0),2)
@@ -89,9 +89,9 @@ while i < num_frames:
                 car_exit = True
 
     if score[1] == 0: 
-        cv2.polylines(frame,np.int32([box2]), True ,(0,0,255),2  )
+        cv2.polylines(frame,np.int32([box2]), True ,(0,0,255),11  )
     else:
-        cv2.polylines(frame,np.int32([box2]),True,(0,255,0), 2)
+        cv2.polylines(frame,np.int32([box2]),True,(0,255,0),11)
         cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
 
 

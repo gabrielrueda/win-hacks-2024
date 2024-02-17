@@ -19,7 +19,7 @@ capSize = (640,360)
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 #fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter()
-success = out.open('./teste5.mp4',fourcc,fps,capSize,True)
+success = out.open('./test.mp4',fourcc,fps,capSize,True)
 
 num_frames = count_frames(path)
 print(num_frames)
@@ -27,7 +27,7 @@ print(num_frames)
 Call_SVM().training()
 print("Trained")
 
-get_point = 0  
+# get_point = 0  
 i = 0 
 
 while i < num_frames:
@@ -36,26 +36,24 @@ while i < num_frames:
     frame = imutils.resize(frame, width=450)  
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    #cv2.imshow("gray ", gray )
 
     gau = cv2.GaussianBlur(gray, (7, 7), 0)
-    #cv2.imshow("gau ", gau )
 
     
     # Not work yet
 
-    if get_point == True:
-        number_of_places = 2 # Defini o numero de vagas que voce ira selecionar 
-        boxes = image_utils.getSpotsCoordiantesFromImage(frame, number_of_places)
-        boxes = asarray(boxes)
-        print(boxes)
-        check = False
+    # if get_point == True:
+    #     number_of_places = 2 # Defini o numero de vagas que voce ira selecionar 
+    #     boxes = image_utils.getSpotsCoordiantesFromImage(frame, number_of_places)
+    #     boxes = asarray(boxes)
+    #     print(boxes)
+    #     check = False
 
-    else:
-        box1 = np.array([(130.14516129032256, 226.74999999999994), (85.68951612903224, 223.12096774193543), (121.97983870967742, 175.0362903225806), (155.5483870967742, 179.57258064516125)])       
-        box2 = np.array ([(137.4032258064516, 225.84274193548384), (166.43548387096774, 173.22177419354836), (210.89112903225805, 177.758064516129), (196.375, 226.74999999999994)])
-        
-        boxes = [box1, box2]
+    # else:
+    box1 = np.array([(130.14516129032256, 226.74999999999994), (85.68951612903224, 223.12096774193543), (121.97983870967742, 175.0362903225806), (155.5483870967742, 179.57258064516125)])       
+    box2 = np.array ([(137.4032258064516, 225.84274193548384), (166.43548387096774, 173.22177419354836), (210.89112903225805, 177.758064516129), (196.375, 226.74999999999994)])
+    
+    boxes = [box1, box2]
 
 
     img_resize = image_utils.getRotateRect(gau, boxes)
@@ -66,6 +64,8 @@ while i < num_frames:
     score1 = SVM().predict(feature[1])
 
     print (score0, score1)'''
+
+
     timestamp = datetime.datetime.now()
 
 
@@ -74,18 +74,18 @@ while i < num_frames:
 
     if score[0] == 0: 
         cv2.polylines(frame,np.int32([box1]), True ,(0,0,255),2  )
-        saida = False
+        car_exit = False
         i = 0
 
 
     else:
         cv2.polylines(frame,np.int32([box1]),True,(0,255,0), 2)
 
-        if saida == False:
-            cv2.putText(frame, timestamp.strftime(" Saida as: %d %m %Y %I:%M:%S"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0),2)
+        if car_exit == False:
+            cv2.putText(frame, timestamp.strftime(" car_exit as: %d %m %Y %I:%M:%S"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0),2)
             i += 1
             if i > 100: 
-                saida = True
+                car_exit = True
 
 
     if score[1] == 0: 
@@ -104,7 +104,7 @@ while i < num_frames:
     cv2.imshow("frame", frame)
 
     key = cv2.waitKey(1) & 0xFF
-    # Se a tecla 'q' for pressionada, finaliza com o loop
+    # If the 'q' key is pressed, the loop ends
     if key == ord("q"):
         break
 

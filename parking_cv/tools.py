@@ -8,39 +8,24 @@ import glob
 
 
 class image_utils():
-
     def __init__(self):
         pass
 
     def extract_features(self, img_resize):
-
-        lista_globals = []
-
+        list_globals = []
         for image in img_resize:
-
             hist = cv2.calcHist([image], [0], None, [256], [0,256])
             hist = hist.flatten()
-
             edged = cv2.Canny(image, 200, 250)
             edged = edged.flatten()
-
             flat = image.flatten()
-
             global_feature = np.hstack([hist, edged, flat])
-            #global_feature = flat
-            #print(global_feature.shape)
-            lista_globals.append(global_feature)
+            list_globals.append(global_feature)
+
+        list_globals = np.asarray(list_globals)
 
 
-        #print(lista_globals.shape)
-        lista_globals = np.asarray(lista_globals)
-        #print(lista_globals.shape)
-
-
-        return lista_globals
-
-            
-            
+        return list_globals
 
     def getSpotsCoordiantesFromImage(img, num_space) :
         #coordinate_lists has this format[ [(x1,y1), (x2,y2), (x3,y3), (x4,y4)], [], [] ]
@@ -60,7 +45,7 @@ class image_utils():
         return coordinate_lists
 
 
-    ''' rotaciona imagens '''
+    ''' rotate images '''
     def getRotateRect(img, cooridnate_lists, WIDTH = 100, HEIGHT = 100):
         
         warped_img_lists = []
@@ -84,7 +69,7 @@ class image_utils():
 
     def load_image_from_path(self, path):
 
-        lista_imagens = []
+        list_images = []
 
         img_list = []
         for files in glob.glob(path + "/*.jpg"):
@@ -98,14 +83,11 @@ class image_utils():
 
     def load_imagens_keras_with_labels(path):
         from keras.preprocessing.image import ImageDataGenerator 
-
         train = ImageDataGenerator()
         base_train = train.flow_from_directory(path, class_mode='binary')
 
     def transform_image(self, image, WIDTH = 100, HEIGHT = 100):
-
         img = image
-
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         img = cv2.GaussianBlur(img, (7, 7), 0)    
         img = cv2.resize(img, (WIDTH, HEIGHT), interpolation=cv2.INTER_CUBIC)

@@ -76,11 +76,11 @@ while i < num_frames:
     car_exit = False
 
     if score[0] == 0: 
-        cv2.polylines(frame,np.int32([box1]), True ,(0,0,255),11  )
+        cv2.polylines(frame,np.int32([box1]), True ,(0,0,255),2  )
         car_exit = False
         i = 0
     else:
-        cv2.polylines(frame,np.int32([box1]),True,(0,255,0), 11)
+        cv2.polylines(frame,np.int32([box1]),True,(0,255,0), 2)
 
         if car_exit == False:
             cv2.putText(frame, timestamp.strftime(" car_exit as: %d %m %Y %I:%M:%S"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0),2)
@@ -89,9 +89,71 @@ while i < num_frames:
                 car_exit = True
 
     if score[1] == 0: 
-        cv2.polylines(frame,np.int32([box2]), True ,(0,0,255),11  )
+        cv2.polylines(frame,np.int32([box2]), True ,(0,0,255),2  )
     else:
-        cv2.polylines(frame,np.int32([box2]),True,(0,255,0),11)
+        cv2.polylines(frame,np.int32([box2]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[2] == 0: 
+        cv2.polylines(frame,np.int32([box3]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box3]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[3] == 0: 
+        cv2.polylines(frame,np.int32([box4]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box4]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[4] == 0: 
+        cv2.polylines(frame,np.int32([box5]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box5]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[5] == 0: 
+        cv2.polylines(frame,np.int32([box6]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box6]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[6] == 0: 
+        cv2.polylines(frame,np.int32([box7]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box7]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[7] == 0: 
+        cv2.polylines(frame,np.int32([box8]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box8]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[8] == 0: 
+        cv2.polylines(frame,np.int32([box9]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box9]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+
+    if score[9] == 0: 
+        cv2.polylines(frame,np.int32([box10]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box10]),True,(0,255,0), 2)
+        cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
+
+    if score[10] == 0: 
+        cv2.polylines(frame,np.int32([box11]), True ,(0,0,255),2  )
+    else:
+        cv2.polylines(frame,np.int32([box11]),True,(0,255,0), 2)
         cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)
 
 

@@ -10,7 +10,7 @@ from svm import SVM, Call_SVM
 import datetime
 
 
-path = 'videos/p2.mp4'
+path = 'test2.mp4'
 vs = cv2.VideoCapture(path)
 fps = 12
 capSize = (640,360)
@@ -19,7 +19,7 @@ capSize = (640,360)
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 #fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter()
-success = out.open('./test.mp4',fourcc,fps,capSize,True)
+success = out.open('./test3.mp4',fourcc,fps,capSize,True)
 
 num_frames = count_frames(path)
 print(num_frames)
@@ -32,11 +32,8 @@ i = 0
 
 while i < num_frames:
     ret, frame = vs.read()
-
     frame = imutils.resize(frame, width=450)  
-
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     gau = cv2.GaussianBlur(gray, (7, 7), 0)
 
     
@@ -52,10 +49,7 @@ while i < num_frames:
     # else:
     box1 = np.array([(130.14516129032256, 226.74999999999994), (85.68951612903224, 223.12096774193543), (121.97983870967742, 175.0362903225806), (155.5483870967742, 179.57258064516125)])       
     box2 = np.array ([(137.4032258064516, 225.84274193548384), (166.43548387096774, 173.22177419354836), (210.89112903225805, 177.758064516129), (196.375, 226.74999999999994)])
-    
     boxes = [box1, box2]
-
-
     img_resize = image_utils.getRotateRect(gau, boxes)
     feature = image_utils().extract_features(img_resize)
 
@@ -67,17 +61,14 @@ while i < num_frames:
 
 
     timestamp = datetime.datetime.now()
-
-
-    
     score = SVM().predict(feature)
+
+    car_exit = False
 
     if score[0] == 0: 
         cv2.polylines(frame,np.int32([box1]), True ,(0,0,255),2  )
         car_exit = False
         i = 0
-
-
     else:
         cv2.polylines(frame,np.int32([box1]),True,(0,255,0), 2)
 
@@ -87,12 +78,8 @@ while i < num_frames:
             if i > 100: 
                 car_exit = True
 
-
     if score[1] == 0: 
         cv2.polylines(frame,np.int32([box2]), True ,(0,0,255),2  )
-        
-
-
     else:
         cv2.polylines(frame,np.int32([box2]),True,(0,255,0), 2)
         cv2.putText(frame, timestamp.strftime(" %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.35, (0, 0, 255), 5)

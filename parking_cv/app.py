@@ -1,4 +1,4 @@
-import mysql.connector
+# import mysql.connector
 import cv2  
 import imutils
 from imutils import perspective 
@@ -10,8 +10,15 @@ from tools import image_utils
 from svm import SVM, Call_SVM
 from datetime import datetime, date, timedelta
 
+from google.cloud.sql.connector import connector
+import sqlalchemy
 
 #where i am storing database authorization credentials
+
+
+
+
+
 credentials = []
 
 #import credentials from a text file

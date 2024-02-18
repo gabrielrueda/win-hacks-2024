@@ -10,33 +10,48 @@ from tools import image_utils
 from svm import SVM, Call_SVM
 from datetime import datetime, date, timedelta
 
-from google.cloud.sql.connector import connector
+from google.cloud.sql.connector import Connector
 import sqlalchemy
 
+#initialize Connector object
+connector = Connector()
+
 #where i am storing database authorization credentials
+def getconn():
+    conn = connector.connect(
+        "win-hacks-2024-db:us-central1:parkingdb",
+        "pymysql",
+        user="root",
+        password="", #figure out if this is the issue
+        db="parkingdb"
+    )
+    return conn
 
-
-
-
-
-credentials = []
-
-#import credentials from a text file
-with open('credentials.txt', 'r') as f:
-    for content in f:
-        #add to array of content
-        credentials.append(content.strip())
-
-#db credentials for database\
-conn = mysql.connector.connect(
-    host=credentials[0],
-    user=credentials[1],
-    password=credentials[2],
-    database=credentials[3]
+#create connection pool with 'creator' argument to our connection object function
+pool = sqlalchemy.create_engine(
+    "mysql+pymysql://",
+    creator=getconn,
 )
 
-# Create a cursor object
-cursor = conn.cursor()
+with pool.connect() as db_conn:
+    db_conn.execute(
+    "CREATE TABLE PARKING_SLOTS ("
+    "DetectedTime Timestamp NOT NULL,"
+    "Slot1 BOOLEAN NOT NULL,"
+    "Slot2 BOOLEAN NOT NULL,"
+    "Slot3 BOOLEAN NOT NULL,"
+    "Slot4 BOOLEAN NOT NULL,"
+    "Slot5 BOOLEAN NOT NULL,"
+    "Slot6 BOOLEAN NOT NULL,"
+    "Slot7 BOOLEAN NOT NULL,"
+    "Slot8 BOOLEAN NOT NULL,"
+    "Slot9 BOOLEAN NOT NULL,"
+    "Slot10 BOOLEAN NOT NULL,"
+    "Slot11 BOOLEAN NOT NULL);"
+    )
+
+
+quit()
 
 
 
@@ -124,6 +139,14 @@ while True:
         past_time = curr_time
         insert_query = "INSERT INTO PARKING_SLOTS VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         # Execute the query with the Python variables as parameters
+
+        #alterative -- google cloud way
+        # insert_stmt = sqlalchemy.text(
+        #     "INSERT INTO PARKING_SLOTS VALUES (:DetectedTime, :Slot1, :Slot2, :SLot3, :Slot4, :Slot5, :Slot6, :Slot7, :Slot8, :Slot9, :Slot10, :Slot11)",
+        # )
+
+        #execute the entries in the table
+        #db_conn.execute(insert_stmt, DetectedTime=datetime.now(), Slot1=True if result[0] == 1 else False, Slot2=True if result[1] == 1 else False,Slot3=True if result[2] == 1 else False, Slot4=True if result[3] == 1 else False, Slot5=True if result[4] == 1 else False, Slot6=True if result[5] == 1 else False, Slot7=True if result[6] == 1 else False, Slot8=True if result[7] == 1 else False, Slot9=True if result[8] == 1 else False, Slot10=True if result[9] == 1 else False, Slot11=False )
 
         cursor.execute(insert_query, (datetime.now(), True if result[0] == 1 else False, True if result[1] == 1 else False, True if result[2] == 1 else False, True if result[3] == 1 else False, True if result[4] == 1 else False, True if result[5] == 1 else False, True if result[6] == 1 else False, True if result[7] == 1 else False, True if result[8] == 1 else False, True if result[9] == 1 else False, False))
         conn.commit()

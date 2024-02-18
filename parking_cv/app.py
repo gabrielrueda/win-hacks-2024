@@ -86,19 +86,18 @@ while True:
     # frame = tmp_frame
     gau = cv2.GaussianBlur(gray, (7, 7), 0)
 
-    box1 = np.array ([(48, 145), (28, 143), (10, 170), (27, 181)])
-    box2 = np.array ([(81, 148), (54, 146), (31, 182), (59, 186)])
-    box3 = np.array ([(116, 153), (93, 149), (70, 187), (95, 192)])
-    box4 = np.array ([(154, 153), (123, 151), (102, 193), (141, 198)])
-    box5 = np.array ([(195, 155), (167, 153), (154, 197), (192, 200)])
-    box6 = np.array ([(239, 157), (204, 156), (200, 198), (241, 199)])
-    box7 = np.array ([(280, 158), (248, 157), (248, 202), (287, 203)])
-    box8 = np.array ([(318, 160), (288, 158), (295, 202), (335, 202)])
-    box9 = np.array ([(351, 158), (325, 159), (342, 201), (376, 203)])
-    box10 = np.array ([(384, 159), (360, 160), (381, 201), (408, 197)])
-    box11 = np.array ([(411, 157), (388, 159), (411, 196), (435, 192)])
+    box1 = np.array ([(42, 142), (13, 142), (0, 159), (20, 173)])
+    box2 = np.array ([(77, 142), (49, 143), (30, 176), (60, 180)])
+    box3 = np.array ([(121, 142), (82, 143), (70, 178), (105, 181)])
+    box4 = np.array ([(165, 146), (127, 145), (118, 183), (155, 185)])
+    box5 = np.array ([(218, 146), (175, 145), (168, 182), (222, 180)])
+    box6 = np.array ([(269, 148), (227, 146), (227, 184), (275, 186)])
+    box7 = np.array ([(310, 149), (275, 147), (285, 186), (322, 185)])
+    box8 = np.array ([(352, 150), (319, 149), (334, 188), (368, 186)])
+    box9 = np.array ([(394, 153), (360, 152), (375, 182), (413, 184)])
+    box10 = np.array ([(426, 154), (403, 151), (424, 186), (448, 185)])
 
-    boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11]
+    boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9, box10]
     img_resize = image_utils.getRotateRect(gau, boxes)
     feature = image_utils().extract_features(img_resize)
 
@@ -119,7 +118,7 @@ while True:
         insert_query = "INSERT INTO PARKING_SLOTS VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         # Execute the query with the Python variables as parameters
 
-        cursor.execute(insert_query, (datetime.now(), True if result[0] == 1 else False, True if result[1] == 1 else False, True if result[2] == 1 else False, True if result[3] == 1 else False, True if result[4] == 1 else False, True if result[5] == 1 else False, True if result[6] == 1 else False, True if result[7] == 1 else False, True if result[8] == 1 else False, True if result[9] == 1 else False, True if result[10] == 1 else False))
+        cursor.execute(insert_query, (datetime.now(), True if result[0] == 1 else False, True if result[1] == 1 else False, True if result[2] == 1 else False, True if result[3] == 1 else False, True if result[4] == 1 else False, True if result[5] == 1 else False, True if result[6] == 1 else False, True if result[7] == 1 else False, True if result[8] == 1 else False, True if result[9] == 1 else False, False))
         conn.commit()
 
 
@@ -174,11 +173,6 @@ while True:
         cv2.polylines(frame,np.int32([box10]), True ,(0,0,255),2  )
     else:
         cv2.polylines(frame,np.int32([box10]),True,(0,255,0), 2)
-        
-    if score[10] == 0: 
-        cv2.polylines(frame,np.int32([box11]), True ,(0,0,255),2  )
-    else:
-        cv2.polylines(frame,np.int32([box11]),True,(0,255,0), 2)
 
     cv2.imshow("frame", frame)
 

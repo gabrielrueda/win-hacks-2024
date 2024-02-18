@@ -1,7 +1,8 @@
 # Smart Park
 
 ## About
-An smart parking system that will detect parked cars using opencv and arduino for a real-life model. The information is stored in a MariaDB database and statistics/UI are shown in Streamlit framework
+An smart parking system that will detect parked cars using opencv and arduino for a real-life model. The information is stored in a MariaDB database and statistics/UI are shown in Streamlit framework. <br><br>
+
 
 ![logo](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/142eee82-6c98-4ad6-99e9-3a8b02e65b61)
 
@@ -73,3 +74,6 @@ streamlit run streamlit.py
 
 ## Videos
 https://youtu.be/vlWlhAm0BZU
+
+## Credits
+We took inspiration from this repository: https://github.com/offsouza/parking_lot_opencv

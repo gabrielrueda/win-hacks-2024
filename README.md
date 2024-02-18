@@ -9,20 +9,25 @@ An smart parking system that will detect parked cars using opencv and arduino fo
 ## Setup 
 
 ### Requirements
-1. To install the requirements, type this command:
+1. Clone the repository using command:
+```bash
+git clone https://github.com/gabrielrueda/win-hacks-2024.git
+```
+
+2. To install the requirements, type this command:
 ``` bash
 pip install -r requirements.txt
 ```
 
-2. Set up the database (we are using mariadb):
+3. Set up the database (we are using mariadb):
 https://mariadb.com/kb/en/getting-installing-and-upgrading-mariadb/ 
 
-3. Activate the database using command:
+4. Activate the database using command:
 ```bash
 mariadb -u {username} -p
 ```
 
-4. Once mariadb is activated, use the following queries
+5. Once mariadb is activated, use the following queries
 ``` sql
 CREATE TABLE PARKING_SLOTS (
     DetectedTime Timestamp NOT NULL,
@@ -40,7 +45,7 @@ CREATE TABLE PARKING_SLOTS (
 );
 ```
 
-5. Hardware tools used: 
+6. Hardware tools used: 
 Webcam, electric tape for outlining the parking slot sections, model cars (Hot Wheels), Arduino Nano, general electronics, and LED bulbs that will light up if spot is not taken. 
 
 ### Run
@@ -67,4 +72,4 @@ streamlit run streamlit.py
 
 
 ## Videos
-TO DO
+https://youtu.be/vlWlhAm0BZU

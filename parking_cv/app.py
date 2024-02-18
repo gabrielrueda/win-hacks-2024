@@ -10,10 +10,10 @@ from svm import SVM, Call_SVM
 import datetime
 
 
-path = './videos/sample_vid.mp4'
-vs = cv2.VideoCapture(path)
+# path = './videos/sample_vid.mp4'
+# vs = cv2.VideoCapture(path)
 
-# vs = cv2.VideoCapture(2)
+vs = cv2.VideoCapture(2)
 fps = 12
 capSize = (640,360)
 #capSize = (1920,1080)

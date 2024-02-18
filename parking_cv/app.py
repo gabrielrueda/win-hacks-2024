@@ -10,10 +10,10 @@ from svm import SVM, Call_SVM
 import datetime
 
 
-# path = 'test4.mp4'
-# vs = cv2.VideoCapture(path)
+path = './videos/sample_vid.mp4'
+vs = cv2.VideoCapture(path)
 
-vs = cv2.VideoCapture(2)
+# vs = cv2.VideoCapture(2)
 fps = 12
 capSize = (640,360)
 #capSize = (1920,1080)
@@ -21,7 +21,7 @@ capSize = (640,360)
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 #fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter()
-success = out.open('./test5.mp4',fourcc,fps,capSize,True)
+success = out.open('./videos/output.mp4',fourcc,fps,capSize,True)
 
 # num_frames = count_frames(path)
 # print(num_frames)

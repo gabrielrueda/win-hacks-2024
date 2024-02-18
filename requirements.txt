@@ -1,0 +1,9 @@
+opencv-python
+imutils
+numpy
+matplotlib
+scikit-learn
+pandas
+streamlit
+altair 
+keyboa

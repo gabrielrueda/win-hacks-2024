@@ -5,8 +5,9 @@ from datetime import time, timedelta,datetime, date
 
 #parking credentials
 st.image('images/parking.jpg', width=100) 
-st.title('This is a title')
+st.title('Smart Parking System')
 st.write("123 Park St.")
+
 
 #gets the current date
 today = date.today()
@@ -79,9 +80,10 @@ if option == "Admin View":
         #     st.write("Authentication error")
 
 else:  # User View
-    st.write(date)
-    st.write(time_in_12_hour_format)
-    st.write(f"{spot_taken} / {total_spots} spots available")
+    container = st.container(border=True)
+    container.write(date)
+    container.write(time_in_12_hour_format)
+    container.write(f"{spot_taken} / {total_spots} spots available")
 
 
     

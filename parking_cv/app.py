@@ -1,3 +1,4 @@
+import mysql.connector
 import cv2  
 import imutils
 from imutils import perspective 
@@ -7,13 +8,35 @@ from matplotlib import pyplot as plt
 import time
 from tools import image_utils
 from svm import SVM, Call_SVM
-import datetime
+from datetime import datetime, date, timedelta
+
+
+#where i am storing database authorization credentials
+credentials = []
+
+#import credentials from a text file
+with open('credentials.txt', 'r') as f:
+    for content in f:
+        #add to array of content
+        credentials.append(content.strip())
+
+#db credentials for database\
+conn = mysql.connector.connect(
+    host=credentials[0],
+    user=credentials[1],
+    password=credentials[2],
+    database=credentials[3]
+)
+
+# Create a cursor object
+cursor = conn.cursor()
+
 
 
 # path = './videos/sample_vid.mp4'
 # vs = cv2.VideoCapture(path)
 
-vs = cv2.VideoCapture(2)
+vs = cv2.VideoCapture(0)
 fps = 12
 capSize = (640,360)
 #capSize = (1920,1080)
@@ -29,6 +52,7 @@ success = out.open('./videos/output.mp4',fourcc,fps,capSize,True)
 Call_SVM().training()
 print("Trained")
 
+past_time = time.time()
 
 while True:
     ret, tmp_frame = vs.read()
@@ -79,16 +103,27 @@ while True:
     feature = image_utils().extract_features(img_resize)
 
 
-    timestamp = datetime.datetime.now()
+    # timestamp = datetime.datetime.now()
     score = SVM().predict(feature)
 
     # result is the list of 1's and 0's that can be sent to the leds
     result = []
 
     for x in score:
-        result.append(x[0]) 
+        result.append(x[0])
 
-    car_exit = False
+    curr_time = time.time()
+    if(curr_time - past_time > 2):
+        print("update db")
+        past_time = curr_time
+        insert_query = "INSERT INTO PARKING_SLOTS VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        # Execute the query with the Python variables as parameters
+
+        cursor.execute(insert_query, (datetime.now(), True if result[0] == 1 else False, True if result[1] == 1 else False, True if result[2] == 1 else False, True if result[3] == 1 else False, True if result[4] == 1 else False, True if result[5] == 1 else False, True if result[6] == 1 else False, True if result[7] == 1 else False, True if result[8] == 1 else False, True if result[9] == 1 else False, True if result[10] == 1 else False))
+        conn.commit()
+
+
+    car_exit = False 
 
     if score[0] == 0: 
         cv2.polylines(frame,np.int32([box1]), True ,(0,0,255),2 )
@@ -161,6 +196,9 @@ while True:
     #     plt.plot(hist)
     #     plt.show()
 
+
+cursor.close()
+conn.close()
 
 cv2.destroyAllWindows()
 

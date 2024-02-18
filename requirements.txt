@@ -6,4 +6,5 @@ scikit-learn
 pandas
 streamlit
 altair 
-keyboa
+mysql-connector
+pyserial

@@ -71,8 +71,10 @@ df = pd.DataFrame.from_dict(data_df)
 cursor.execute("SELECT * FROM PARKING_SLOTS ORDER BY DetectedTime DESC LIMIT 1;")
 slots_taken = cursor.fetchall()
 
+spots_taken = 0
+
 for slots in slots_taken:
-    spots_taken = sum(slots[1:])
+    spots_taken = 10 - sum(slots[1:])
 
 
 #our sample parking spot space 

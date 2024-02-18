@@ -9,9 +9,17 @@ import time
 from tools import image_utils
 from svm import SVM, Call_SVM
 from datetime import datetime, date, timedelta
+import serial
 
 
-#where i am storing database authorization credentials
+
+ser = serial.Serial('/dev/ttyUSB0', 9600)
+
+
+    
+
+
+# where i am storing database authorization credentials
 credentials = []
 
 #import credentials from a text file
@@ -107,6 +115,15 @@ while True:
 
     # result is the list of 1's and 0's that can be sent to the leds
     result = []
+
+
+    led_int = 0
+    for i in range(len(score) - 1, -1, -1):
+        led_int = led_int << 1
+        led_int += ((score[i][0]).item() & 0xFF)
+
+    print(led_int)
+    ser.write(str(led_int).encode())
 
     for x in score:
         result.append(x[0])

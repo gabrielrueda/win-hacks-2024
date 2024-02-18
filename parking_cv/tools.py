@@ -59,7 +59,7 @@ class image_utils():
             # plt.imshow(warped, cmap = 'gray', interpolation = 'bicubic')
             # plt.xticks([]), plt.yticks([])
             # plt.show()
-            cv2.imshow("Vaga - %d"%i, warped_resize)
+            # cv2.imshow("Vaga - %d"%i, warped_resize)
             
             warped_img_lists.append(warped_resize)
 

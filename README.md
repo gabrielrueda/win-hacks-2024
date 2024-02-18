@@ -56,8 +56,8 @@ streamlit run streamlit.py
  
  
 ## Snapshots
-![IMG_3432![IMG_3431](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/89ef5581-41fa-4f29-98c8-ec06e1de29b5)
-![IMG_3431](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/6c3cf474-b276-4260-a558-444670b7b337)
+![IMG_3431](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/affad5a3-c802-4a17-a95e-ccb5091b0afb)
+![IMG_3432](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/c9cca96a-c8fe-4633-89ba-bd3662798055)
 ![screenshot1](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/68b97951-af28-4ea0-a997-17336c7c3566)
 ![screenshot3](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/255dfb48-4232-4095-9297-6b77d5069931)
 ![screenshot4](https://github.com/gabrielrueda/win-hacks-2024/assets/93105329/d1002780-7bd7-4020-9bfa-aad512f5fa2b)
